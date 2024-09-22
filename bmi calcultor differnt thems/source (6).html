@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+            <style>body {
+    cursor: url('path/to/your/spooky-cursor.png'), auto; /* Custom spooky cursor */
+    background: url('path/to/your/haunted-background.jpg') no-repeat center center fixed; /* Haunted background image */
+    background-size: cover;
+    color: #fff; /* White text for contrast */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Flickering effect */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    20% { opacity: 0.5; }
+    40% { opacity: 0.8; }
+    60% { opacity: 0.2; }
+    80% { opacity: 0.9; }
+}
+
+/* Creepy sliding in */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%) rotate(-10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotate(0);
+        opacity: 1;
+    }
+}
+
+/* Ghostly wobble */
+@keyframes wobble {
+    0% { transform: rotate(0); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0); }
+}
+
+/* Haunted shadows */
+@keyframes shadowDance {
+    0% {
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(0, 255, 0, 0.6), 0 0 50px rgba(0, 255, 0, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.3);
+    }
+}
+
+/* Eerie breathing animation */
+@keyframes breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Spooky container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+    text-align: center;
+    background-color: rgba(20, 20, 20, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    animation: ghostAppear 2s ease-out; /* Ghostly fade-in effect */
+}
+
+/* Spooky animations for headings */
+h2, h3 {
+    animation: flicker 1s infinite, shadowDance 1.5s infinite;
+    font-size: 3rem;
+    color: #ff5555;
+}
+
+/* Button with shaking effect */
+button {
+    height: 50px;
+    width: 150px;
+    border-radius: 30px;
+    border: 2px solid #ff4444;
+    cursor: pointer;
+    color: #fff;
+    background-color: #111;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff1111;
+    transition: all 0.3s ease;
+    animation: wobble 0.8s infinite;
+}
+
+button:hover {
+    background-color: #ff4444;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+}
+
+/* Number input field styling */
+.number {
+    height: 40px;
+    width: 100%;
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f8f8f8;
+}
+
+.number:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+</style>
+        </head>
+        <body>
+            
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&amp;display=swap" rel="stylesheet">
+
+
+
+    <div class="container">
+        <h2>BMI Calculator</h2>
+        <div class="main">
+            <input id="age" class="number" type="number" placeholder="Enter your age">
+            <input id="weight" class="number" type="number" placeholder="Enter your weight (kg)">
+            <input id="height" class="number" type="number" step="0.01" placeholder="Enter your height (meters)">
+            <button onclick="calculateBMI()">Calculate BMI</button>
+        </div>
+    </div>
+    <footer>
+        <p>Made by Himanshu</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+            <script>function calculateBMI() {
+    // Get the input values
+    const age = parseInt(document.getElementById("age").value);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const height = parseFloat(document.getElementById("height").value);
+
+    // Check if the inputs are valid
+    if (isNaN(age) || age <= 0 || isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
+        alert("Please enter valid age, height, and weight values.");
+        return;
+    }
+
+    // Calculate BMI
+    const bmi = weight / (height * height);
+
+    // Determine BMI category
+    let category = "";
+    if (bmi < 18.5) {
+        category = "Underweight";
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        category = "Normal weight";
+    } else if (bmi >= 25 && bmi < 29.9) {
+        category = "Overweight";
+    } else {
+        category = "Obese";
+    }
+
+    // Open new window with BMI details
+    const bmiResult = `
+        <html>
+        <head>
+            <title>BMI Result</title>
+            <style>
+                body { font-family: Arial, sans-serif; background-color: #f4a261; text-align: center; padding: 20px; }
+                h2 { color: #264653; }
+                p { font-size: 1.2rem; color: #2a9d8f; }
+                .bmi-box { 
+                    background-color: #ffffff; 
+                    border: 2px solid #264653; 
+                    padding: 20px; 
+                    border-radius: 10px;
+                    margin: 20px auto;
+                    width: 60%;
+                    max-width: 400px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>Your BMI Result</h2>
+            <div class="bmi-box">
+                <p><strong>Age:</strong> ${age} years</p>
+                <p><strong>Weight:</strong> ${weight} kg</p>
+                <p><strong>Height:</strong> ${height} meters</p>
+                <p><strong>BMI:</strong> ${bmi.toFixed(2)}</p>
+                <p><strong>Category:</strong> ${category}</p>
+            </div>
+        </body>
+        </html>
+    `;
+
+    // Create a new window and write the result into it
+    const resultWindow = window.open("", "_blank", "width=600,height=400");
+    resultWindow.document.write(bmiResult);
+    resultWindow.document.close();
+}
+
+
+</script>
+        
+    
+</body>

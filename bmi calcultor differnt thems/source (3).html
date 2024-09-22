@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+            <style>* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4a261; /* Softer sandy brown */
+}
+
+/* Container for overall layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Styling for headings */
+h2 {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 3rem;
+    color: #6a4c93;
+    border: 5px solid #264653;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: #e9c46a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+h2:hover {
+    color: #e76f51;
+    background-color: #264653;
+}
+
+h3 {
+    font-size: 2.5rem;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 40px;
+    color: #6a4c93;
+    transition: color 0.3s ease;
+}
+
+h3:hover {
+    color: #e76f51;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: #2a9d8f;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Main form styling */
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    border: 2px solid #264653;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.main:hover {
+    transform: scale(1.05);
+}
+
+/* Input field styling */
+.number {
+    height: 40px;
+    width: 100%;
+    border: 2px solid #264653;
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.number:focus {
+    border-color: #e76f51;
+    outline: none;
+}
+
+/* Button styling */
+button {
+    height: 50px;
+    width: 150px;
+    border-radius: 30px;
+    border: 2px solid #264653;
+    cursor: pointer;
+    color: white;
+    background-color: #2a9d8f;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #264653;
+    border-color: #e76f51;
+}
+
+button:active {
+    color: #f4a261;
+    transform: scale(0.96);
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #264653;
+    color: white;
+    font-size: 1rem;
+    border-top: 5px solid #6a4c93;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+#result {
+    font-size: 2rem;
+    color: #264653;
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #264653;
+    border-radius: 8px;
+    background-color: #e9c46a;
+}
+
+
+/* Media Query for small screens */
+@media (max-width: 600px) {
+    h2, h3 {
+        font-size: 1.8rem;
+    }
+    
+    .main {
+        width: 90%;
+        padding: 15px;
+    }
+
+    button {
+        width: 120px;
+        font-size: 1rem;
+    }
+
+    .number {
+        font-size: 1rem;
+        height: 35px;
+    }
+
+    footer {
+        font-size: 0.9rem;
+    }
+}
+</style>
+        </head>
+        <body>
+            
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+    <div class="container">
+        <h2>BMI Calculator</h2>
+        <div class="main">
+            <input id="age" class="number" type="number" placeholder="Enter your age">
+            <input id="weight" class="number" type="number" placeholder="Enter your weight (kg)">
+            <input id="height" class="number" type="number" step="0.01" placeholder="Enter your height (meters)">
+            <button onclick="calculateBMI()">Calculate BMI</button>
+        </div>
+    </div>
+    <footer>
+        <p>Made by Himanshu</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+            <script>function calculateBMI() {
+    // Get the input values
+    const age = parseInt(document.getElementById("age").value);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const height = parseFloat(document.getElementById("height").value);
+
+    // Check if the inputs are valid
+    if (isNaN(age) || age <= 0 || isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
+        alert("Please enter valid age, height, and weight values.");
+        return;
+    }
+
+    // Calculate BMI
+    const bmi = weight / (height * height);
+
+    // Determine BMI category
+    let category = "";
+    if (bmi < 18.5) {
+        category = "Underweight";
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        category = "Normal weight";
+    } else if (bmi >= 25 && bmi < 29.9) {
+        category = "Overweight";
+    } else {
+        category = "Obese";
+    }
+
+    // Open new window with BMI details
+    const bmiResult = `
+        <html>
+        <head>
+            <title>BMI Result</title>
+            <style>
+                body { font-family: Arial, sans-serif; background-color: #f4a261; text-align: center; padding: 20px; }
+                h2 { color: #264653; }
+                p { font-size: 1.2rem; color: #2a9d8f; }
+                .bmi-box { 
+                    background-color: #ffffff; 
+                    border: 2px solid #264653; 
+                    padding: 20px; 
+                    border-radius: 10px;
+                    margin: 20px auto;
+                    width: 60%;
+                    max-width: 400px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>Your BMI Result</h2>
+            <div class="bmi-box">
+                <p><strong>Age:</strong> ${age} years</p>
+                <p><strong>Weight:</strong> ${weight} kg</p>
+                <p><strong>Height:</strong> ${height} meters</p>
+                <p><strong>BMI:</strong> ${bmi.toFixed(2)}</p>
+                <p><strong>Category:</strong> ${category}</p>
+            </div>
+        </body>
+        </html>
+    `;
+
+    // Create a new window and write the result into it
+    const resultWindow = window.open("", "_blank", "width=600,height=400");
+    resultWindow.document.write(bmiResult);
+    resultWindow.document.close();
+}
+</script>
+        
+    
+</body>
